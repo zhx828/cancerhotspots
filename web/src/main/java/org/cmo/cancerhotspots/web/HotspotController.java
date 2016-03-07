@@ -1,5 +1,8 @@
 package org.cmo.cancerhotspots.web;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.cmo.cancerhotspots.domain.HotspotMutation;
 import org.cmo.cancerhotspots.service.HotspotMutationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,14 @@ public class HotspotController
         this.hotspotMutationService = hotspotMutationService;
     }
 
+    @ApiOperation(value = "getAllHotspotMutations",
+        nickname = "getAllHotspotMutations")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Success",
+            response = HotspotMutation.class,
+            responseContainer = "List"),
+        @ApiResponse(code = 400, message = "Bad Request")
+    })
     @RequestMapping(value = "/hotspots",
         method = {RequestMethod.GET, RequestMethod.POST},
         produces = "application/json")
